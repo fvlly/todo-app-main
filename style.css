@@ -15,7 +15,7 @@ body {
 }
 
 .dark-theme {
-  color: hsl(233, 14%, 35%);
+  color: #b4b7d9;
   background-color: hsl(235, 24%, 19%);
 }
 
@@ -80,7 +80,7 @@ body {
   align-items: center;
   cursor: pointer;
   padding: 0.5em;
-  border-bottom: 1px solid hsl(233, 14%, 35%);
+  border-bottom: 1px solid #b4b7d9;
 }
 .item-container p,
 .item-container span {
@@ -95,17 +95,75 @@ body {
 .item-container:hover .clear {
   opacity: 1;
 }
-
+/* custom input checkbox */
 .checkbox {
   display: inline-block;
   width: 25px;
   height: 25px;
   border: 1px solid hsl(233, 14%, 35%);
   border-radius: 50%;
+  position: relative;
+  transition: background ease-in-out 300ms;
+}
+
+.checkbox:hover {
+  /* border-image: linear-gradient( only works for rectangular shapes
+    to right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+  border-image-slice: 1; */
+}
+/* creating gradients on the border */
+.checkbox::after {
+  border-radius: 50%;
+  content: "";
+  background-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
+  top: -20px;
+  left: -10px;
+  bottom: -10px;
+  right: -10px;
+  position: absolute;
+
+  z-index: -1;
+}
+
+.checkbox::before {
+  display: block;
+  content: "\2713";
+  position: absolute;
+  color: #fff;
+  top: -0.1em;
+  left: 0.3em;
+  /* transition: transform ease-in 300ms;
+  transform: scale(0); */
+  opacity: 0;
+}
+
+.checked .checkbox::before {
+  /* transform: scale(0.8); */
+  opacity: 1;
 }
 
 .checkbox + p {
   margin-left: 0.5em;
+}
+
+/* checking todo items */
+.checked + p {
+  text-decoration: line-through;
+}
+
+.checkbox.checked {
+  background: linear-gradient(
+    to right,
+    hsl(192, 100%, 67%),
+    hsl(280, 87%, 65%)
+  );
+}
+
+.checkbox.checked.checkbox::before {
+  opacity: 1;
 }
 
 /* This is the filter section */

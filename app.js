@@ -1,9 +1,9 @@
 // handling input-field
 
 const inputField = document.querySelector(".input-field");
+const listContainer = document.querySelector(".list-items");
 
 inputField.addEventListener("keydown", (e) => {
-  const listContainer = document.querySelector(".list-items");
   const itemsContainer = document.createElement("div");
   const checkBox = document.createElement("span");
   const listItem = document.createElement("p");
@@ -21,11 +21,19 @@ inputField.addEventListener("keydown", (e) => {
     clearButton.append("X");
     clearButton.classList.add("clear");
     listContainer.appendChild(itemsContainer);
+    countItems();
   }
+
+  // line thorugh list items
+  checkBox.addEventListener("click", () => {
+    checkBox.classList.toggle("checked");
+    countItems();
+  });
 
   //   Delete list items
   clearButton.addEventListener("click", (e) => {
     e.target.parentElement.remove();
+    countItems();
   });
 });
 
@@ -42,7 +50,7 @@ toggleBackground.addEventListener("click", () => {
     // darkTheme.forEach((element) => element.classList.contains("dark-theme")
   ) {
     toggleBackground.innerText = "brightness_3";
-    filterSection.style.background = "hsl(0, 0%, 98%)";
+    filterSection.style.background = "#f0f0f0";
     darkTheme.forEach((element) => {
       element.classList.toggle("light-theme");
     });
@@ -53,4 +61,55 @@ toggleBackground.addEventListener("click", () => {
       element.classList.toggle("dark-theme");
     });
   }
+});
+
+// count list items
+function countItems() {
+  let counter = listContainer.childElementCount;
+  let checkedList = document.querySelectorAll(".checked").length;
+
+  itemsCounter.innerHTML = `${counter - checkedList} items left`;
+}
+
+// Handling item filter
+
+const itemsCounter = document.querySelector(".items-counter");
+const filterAll = document.querySelector(".filter-all");
+const filterActive = document.querySelector(".filter-active");
+const filterCompleted = document.querySelector(".filter-completed");
+const clearItems = document.querySelector(".clear-items");
+
+// display all list items
+filterAll.addEventListener("click", () => {
+  document
+    .querySelectorAll(".checkbox")
+    .forEach((item) => (item.parentElement.style.display = "flex"));
+});
+
+// display checked items
+filterCompleted.addEventListener("click", () => {
+  document.querySelectorAll(".checked").forEach((item) => {
+    item.parentElement.style.display = "flex";
+  });
+  document.querySelectorAll(".checkbox:not(.checked)").forEach((item) => {
+    item.parentElement.style.display = "none";
+  });
+});
+
+// display unchecked items
+filterActive.addEventListener("click", () => {
+  document
+    .querySelectorAll(".checked")
+    .forEach((item) => (item.parentElement.style.display = "none"));
+
+  document.querySelectorAll(".checkbox:not(.checked)").forEach((item) => {
+    item.parentElement.style.display = "flex";
+  });
+});
+
+// erase completed list items
+clearItems.addEventListener("click", () => {
+  document.querySelectorAll(".checked").forEach((item) => {
+    item.parentElement.remove();
+  });
 });
