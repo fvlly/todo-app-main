@@ -106,16 +106,16 @@ body {
   transition: background ease-in-out 300ms;
 }
 
-.checkbox:hover {
-  /* border-image: linear-gradient( only works for rectangular shapes
+/* .checkbox:hover { */
+/* border-image: linear-gradient( only works for rectangular shapes
     to right,
     hsl(192, 100%, 67%),
     hsl(280, 87%, 65%)
   );
   border-image-slice: 1; */
-}
+/* } */
 /* creating gradients on the border */
-.checkbox::after {
+/* .checkbox::after {
   border-radius: 50%;
   content: "";
   background-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%);
@@ -126,7 +126,7 @@ body {
   position: absolute;
 
   z-index: -1;
-}
+/* }  didn't work, draggable library highlights pseudo element*/
 
 .checkbox::before {
   display: block;
@@ -183,6 +183,15 @@ body {
   text-decoration: none;
 }
 
+/* responsive list-index */
+/* .list-index {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 50px;
+  width: 100%;
+} */
+
 @media (min-width: 600px) {
   .container {
     width: 55%;
@@ -203,4 +212,10 @@ body {
     margin-top: 5em;
     border-radius: 5px;
   }
+
+  /* .list-index {
+    display: block;
+    position: static;
+    margin-left: 3em;
+  } */
 }

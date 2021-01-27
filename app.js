@@ -113,3 +113,10 @@ clearItems.addEventListener("click", () => {
     item.parentElement.remove();
   });
 });
+
+// mkaing list draggable
+
+const drageArea = document.querySelector(".list-items");
+new Sortable(drageArea, {
+  animation: 300,
+});
